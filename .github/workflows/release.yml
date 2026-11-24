@@ -32,7 +32,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Шаг 1: Собираем и пушим с тегом latest
       - name: Build and push (latest)
         uses: docker/build-push-action@v5
         with:
@@ -45,7 +44,6 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.version=latest
 
-      # Шаг 2: Собираем и пушим с тегом релиза
       - name: Build and push (release tag)
         uses: docker/build-push-action@v5
         with:

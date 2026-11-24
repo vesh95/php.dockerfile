@@ -10,6 +10,15 @@
 
 ### Отдельный Dockerfile
 
+Скачать Dockerfile из нужного релиза
+```
+curl https://raw.githubusercontent.com/vesh95/php.dockerfile/refs/tags/v8.5/Dockerfile > Dockerfile
+```
+
+#### Собрать образ
+`docker build .`
+
+#### Использовать через docker-compose
 ```yaml
 services:
   php:

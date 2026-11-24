@@ -1,17 +1,39 @@
 # PHP Docker
 
-Образ PHP-окружения, собранный на основе кастомного `Dockerfile`.
-
-## Технологии
-
 [![Stack](https://skillicons.dev/icons?i=php,postgresql,redis,bun)](https://skillicons.dev)
 
-В образе предустановлены composer, redis и bun (как альтернатива nodejs)
+Образ PHP-окружения, собранный на основе кастомного `Dockerfile`.
 
-## Адрес образа
+В образе предустановлены адаптеры Redis и PostgreSQL. И инструменты для управления зависимостями Composer и Bun.
 
-Образ размещён в GitHub Container Registry:
-`ghcr.io/vesh95/php.dockerfile`
+## Использование
+
+### Отдельный Dockerfile
+
+```yaml
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    working_dir: /var/www/html
+```
+
+### В docker-compose
+```yaml
+services:
+  php:
+    image: ghcr.io/vesh95/php.dockerfile:latest
+    volumes:
+      - ./app:/var/www/html
+    working_dir: /var/www/html
+```
+
+### Прямой запуск
+
+`docker run -it --rm ghcr.io/vesh95/php.dockerfile:latest php -v`
 
 ## Загрузка образа
 
@@ -26,20 +48,6 @@
 
 Тег версии в точности совпадает с тегом, который вы указали при создании GitHub Release. Например, если релиз создан с тегом v8.5, то и Docker-образ будет доступен как v8.5. Теги версии php совпадают с тегами релизов.
 
-## Использование
-### Прямой запуск
-
-`docker run -it --rm ghcr.io/vesh95/php.dockerfile:latest php -v`
-
-### В docker-compose
-```yaml
-services:
-  php:
-    image: ghcr.io/vesh95/php.dockerfile:latest
-    volumes:
-      - ./app:/var/www/html
-    working_dir: /var/www/html
-```
 ### Как базовый образ
 ```dockerfile
 FROM ghcr.io/vesh95/php.dockerfile:latest
